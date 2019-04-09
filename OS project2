@@ -13,7 +13,26 @@ int main()
         scanf("%d",&bt[i]);
         rt[i]=bt[i];
     }
-printf("\n\nProcess\t|Turnaround Time| Waiting Time\n\n");
 rt[2]=0000;
- 
+for(i=0;i<n;i++)
+{int pos=i;
+for(j=i+1;j<n;j++)
+{
+  if(bt[j]<bt[pos])
+   {
+    rt[i]--;
+    pos=j;
+   }
+  else
+   {
+   rt[pos]--;
+    }
+if(rt[i]==rt[j])
+{
+  if(pid[j]<pid[pos])
+   {
+    pos=j;
+   }
 }
+
+
