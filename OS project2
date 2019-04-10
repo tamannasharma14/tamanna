@@ -1,38 +1,33 @@
-#include<stdio.h>
-int main()
+class student
 {
-    int pid[3],bt[3],rt[3],endTime,i,largest;
-    int remain=0,n,time,sum_wait=0,sum_turnaround=0;
-    printf("Enter no of Processes : ");
-    scanf("%d",&n);
-    for(i=0;i<n;i++)
-    {
-        printf("Enter process Id for Process P%d : ",i+1);
-        scanf("%d",&pid[i]);
-        printf("Enter burst time for Process P%d : ",i+1);
-        scanf("%d",&bt[i]);
-        rt[i]=bt[i];
-    }
-rt[2]=0000;
-for(i=0;i<n;i++)
-{int pos=i;
-for(j=i+1;j<n;j++)
+int pid;
+int burst_time;
+
+public static void main(String ar[])
 {
-  if(bt[j]<bt[pos])
-   {
-    rt[i]--;
-    pos=j;
+student obj[]=new student [3];
+obj[0]=new student();
+obj[1]=new student();
+obj[2]=new student();
+obj[0].pid=2132; obj[1].pid=2102; obj[2].pid=2543;
+obj[0].burst_time=2; obj[1].burst_time=4; obj[2].burst_time=8;
+int tburst=obj[0].burst_time+obj[2].burst_time+obj[1].burst_time;
+int arr[]=new int[14];
+arr[0]=obj[0].burst_time;
+for(i=0;i<tburst;i++)
+{
+  for(j=i+1;j<3;j++)
+ {
+  if(obj[i].burst_time<obj[j].burst_time) 
+  {
+    arr[i]=obj[j].burst_time;
+    obj[j].burst_time--;
    }
-  else
-   {
-   rt[pos]--;
-    }
-if(rt[i]==rt[j])
+else
 {
-  if(pid[j]<pid[pos])
-   {
-    pos=j;
-   }
-}
+obj[i].burst_time;
+]
+}}
+    if(obj[i].bursttime<obj
 
 
