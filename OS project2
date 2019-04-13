@@ -1,33 +1,48 @@
+import java.util.*;
 class student
 {
-int pid;
-int burst_time;
+int pid,burst_time,arrival_time,completion_time,waiting_time,tat,bt_total;
+student(int a,int b,int c)
+   {
+    pid=a;
+    burst_time=b;
+    arrival_time=c;
+     bt_total=b;
+   }
+}
+class TestStudent
+{
+int n;
+ArrayList<student> obj=new ArrayList<student>();
 
 public static void main(String ar[])
 {
-student obj[]=new student [3];
-obj[0]=new student();
-obj[1]=new student();
-obj[2]=new student();
-obj[0].pid=2132; obj[1].pid=2102; obj[2].pid=2543;
-obj[0].burst_time=2; obj[1].burst_time=4; obj[2].burst_time=8;
-int tburst=obj[0].burst_time+obj[2].burst_time+obj[1].burst_time;
-int arr[]=new int[14];
-arr[0]=obj[0].burst_time;
-for(i=0;i<tburst;i++)
+System.out.println("Enter the no.of processes");
+Scanner sc=new Scanner(System.in);
+n=sc.nextInt();
+//student obj[]=new student [3];
+//obj[0]=new student();
+//obj[1]=new student();
+//obj[2]=new student();
+System.out.println("Enter pid , burst time , arrival time");
+Scanner sd=new Scanner(System.in);
+for(i=0;i<n;i++)
 {
-  for(j=i+1;j<3;j++)
- {
-  if(obj[i].burst_time<obj[j].burst_time) 
-  {
-    arr[i]=obj[j].burst_time;
-    obj[j].burst_time--;
-   }
-else
+int pid=sd.nextInt();
+int burst_time=sd.nextInt();
+int arrival_time=sd.nextInt();
+obj.add(new student(pid,burst_time,arrival_time);
+}
+}
+
+scheduling()
 {
-obj[i].burst_time;
-]
-}}
-    if(obj[i].bursttime<obj
+ArrayList<student>obj2= new ArrayList<student>();
 
-
+}
+Process priority(Process a, Process b) {
+		if (a.pid > b.pid) {
+			return rp;
+		} else
+			return lp;
+	}
