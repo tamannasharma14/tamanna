@@ -1,48 +1,69 @@
-import java.util.*;
-class student
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Student
 {
-int pid,burst_time,arrival_time,completion_time,waiting_time,tat,bt_total;
-student(int a,int b,int c)
-   {
-    pid=a;
-    burst_time=b;
-    arrival_time=c;
-     bt_total=b;
-   }
-}
-class TestStudent
-{
+    int pid, bt, at, ct, tat, wt, btt;
+
+    Student(int p, int b, int a)
+    {
+        pid = p;
+        bt = b;
+        at = a;
+        btt = b;
+    }
+};
+
+vector<Student> ar;
 int n;
-ArrayList<student> obj=new ArrayList<student>();
-
-public static void main(String ar[])
+void LRTF(); 
+Process priority(Process lp, Process rp);
+void display();
+int main(int argc, const char **argv)
 {
-System.out.println("Enter the no.of processes");
-Scanner sc=new Scanner(System.in);
-n=sc.nextInt();
-//student obj[]=new student [3];
-//obj[0]=new student();
-//obj[1]=new student();
-//obj[2]=new student();
-System.out.println("Enter pid , burst time , arrival time");
-Scanner sd=new Scanner(System.in);
-for(i=0;i<n;i++)
-{
-int pid=sd.nextInt();
-int burst_time=sd.nextInt();
-int arrival_time=sd.nextInt();
-obj.add(new student(pid,burst_time,arrival_time);
-}
-}
+    cout << "Enter the number of Students ";
+    cin >> n;
+    cout << "Pid \t at \t bt\t";
+    for (int i = 0; i < n; i++)
+    {
 
-scheduling()
-{
-ArrayList<student>obj2= new ArrayList<student>();
-
+        int pid;
+        int at;
+        int bt;
+        cin >> pid >> at >> bt;
+        Student this_student(pid, bt, at);
+        ar.push_back(this_student);
+    }
+    LRTF();
+    display();
+    return 0;
 }
-Process priority(Process a, Process b) {
-		if (a.pid > b.pid) {
-			return rp;
-		} else
-			return lp;
-	}
+bool count()
+{
+    int k = 0;
+    for (Student s : ar)
+    {
+        if (s.bt > 0)
+        {
+            k += 1;
+        }
+    }
+    return k;
+}
+void LRTF()
+{
+    vector<Student> processqueue;
+    int counter = 0, ct = 0, m = 0;
+    do
+    {
+        if (processqueue.size() < n)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (ar[j].at == counter && ar[j].bt > 0)
+                {
+                    readyqueue.push_back(ar[j]);
+                }
+            }
+        }
+ }       
