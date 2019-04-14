@@ -5,7 +5,7 @@ struct Student
 {
     int pid, bt, at, ct, tat, wt, btt;
 
-    Student(int p, int b, int a)
+    Student(int p,int b,int a)
     {
         pid = p;
         bt = b;
@@ -26,15 +26,14 @@ int main(int argc, const char **argv)
 {
     cout << "Enter the number of Students ";
     cin >> pro;
-    cout << "Pid \t at \t bt\t";
     for (int i = 0; i < pro; i++)
     {
-
+        cout << "Pid \t at \t bt\t for process"<<i<<":";
         int pid;
         int at;
         int bt;
-        cin >> pid >> at >> bt;
-        Student this_student(pid, bt, at);
+        cin >> pid>> at>> bt;
+        Student this_student(pid,bt,at);
         ar.push_back(this_student);
     }
     LRTF();
