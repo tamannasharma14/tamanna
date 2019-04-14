@@ -15,16 +15,19 @@ struct Student
 };
 
 vector<Student> ar;
-int n;
-void LRTF(); 
-Process priority(Process lp, Process rp);
+int pro;
+
+// Methods back declaration
+void LRTF();
+Student priority(Student lp, Student rp);
 void display();
+
 int main(int argc, const char **argv)
 {
     cout << "Enter the number of Students ";
-    cin >> n;
+    cin >> pro;
     cout << "Pid \t at \t bt\t";
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < pro; i++)
     {
 
         int pid;
@@ -38,32 +41,94 @@ int main(int argc, const char **argv)
     display();
     return 0;
 }
-bool count()
+bool allDone()
 {
-    int k = 0;
-    for (Student s : ar)
+    int is = 0;
+    for (int i=0;i<ar.size();i++)
     {
-        if (s.bt > 0)
+        if (ar[i].bt > 0)
         {
-            k += 1;
+            is += 1;
         }
     }
-    return k;
+    return is;
 }
+
 void LRTF()
 {
-    vector<Student> processqueue;
-    int counter = 0, ct = 0, m = 0;
+    vector<Student> readyqueue;
+    int timer = 0, ct = 0, m = 0;
     do
     {
-        if (processqueue.size() < n)
+        if (readyqueue.size() < pro)
         {
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < pro; j++)
             {
-                if (ar[j].at == counter && ar[j].bt > 0)
+                if (ar[j].at == timer && ar[j].bt > 0)
                 {
                     readyqueue.push_back(ar[j]);
                 }
             }
         }
- }       
+        if (readyqueue.size() <= 0)
+        {
+            timer++;
+            continue;
+        }
+        Student lpro = (Student)readyqueue[0];
+
+        for (int k = 0; k < readyqueue.size(); k++)
+        {
+
+            if ((readyqueue[k]).bt <= 0)
+            {
+                readyqueue.erase(readyqueue.begin() + k);
+            }
+        }
+        for (int k = 0; k < readyqueue.size(); k++)
+        {
+            if (lpro.bt < (readyqueue[k]).bt && (readyqueue[k]).bt > 0)
+            {
+                lpro = (Student)(readyqueue[k]);
+            }
+            else if (lpro.bt == (readyqueue[k]).bt && (readyqueue[k]).bt > 0)
+            {
+                lpro = (Student)priority(lpro, readyqueue[k]);
+            }
+            if ((readyqueue[k]).bt <= 0)
+            {
+                readyqueue.erase(readyqueue.begin() + k);
+            }
+        }
+
+        timer++;
+        if (lpro.bt > 0)
+        {
+            lpro.bt -= 1;
+            lpro.ct = timer;
+            lpro.tat = lpro.ct - lpro.at;
+            lpro.wt = lpro.tat - lpro.btt;
+        }
+
+    } while (allDone() > 0 || readyqueue.size() > 0);
+}
+
+Student priority(Student lp, Student rp)
+{
+    if (lp.pid > rp.pid)
+    {
+        return rp;
+    }
+    else
+        return lp;
+}
+
+void display()
+{
+
+    cout << "Process id\t Arrival time\t Burst time \t Completion time \t Turn around time \t Waiting time\t";
+    for (int i=0;i<ar.size();i++)
+    {
+        cout << ar[i].pid << "\t" << ar[i].at << "\t" << ar[i].btt << "\t" << ar[i].ct << "\t" << ar[i].tat << "\t" << ar[i].wt;
+    }
+}
