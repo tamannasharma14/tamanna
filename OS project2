@@ -24,7 +24,7 @@ int main()
 			if(process[i]<process[i-1])
 			{
 				burst[i-1]--;
-				c[i-1]=k+1;
+				c[i-1]=k+3;
 			}
 			else
 			{
@@ -53,7 +53,7 @@ tat[i]=c[i]-at[i];	//Turn Around Time = Completion Time - Arrival Time
 wt[i]= tat[i]-cburst[i];//Waiting Time = Turn Around Time - Burst Time
 }
 
-printf("Process 1:Completion time_%d Turn Around Time_%d Waiting Time_%d \n",c[0],tat[0],wt[0]);
-printf("Process 2:Completion time_%d Turn Around Time_%d Waiting Time_%d \n",c[1],tat[1],wt[1]);
-printf("Process 3:Completion time_%d Turn Around Time_%d Waiting Time_%d \n",c[2],tat[2],wt[2]);
+printf("Process 1:\nArrivalTime\tBurstTime\tCompletiontime\tTurnAroundTime\tWaitingTime\n %d\t\t %d\t\t %d\t\t %d\t\t %d \n",at[0],cburst[0],c[0],tat[0],wt[0]);
+printf("Process 2:\nArrivalTime\tBurstTime\tCompletiontime\tTurnAroundTime\tWaitingTime\n %d\t\t %d\t\t %d\t\t %d\t\t %d \n",at[1],cburst[1],c[1],tat[1],wt[1]);
+printf("Process 3:\nArrivalTime\tBurstTime\tCompletiontime\tTurnAroundTime\tWaitingTime\n %d\t\t %d\t\t %d\t\t %d\t\t %d \n",at[2],cburst[2],c[2],tat[2],wt[2]);
 }
