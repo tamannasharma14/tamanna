@@ -1,133 +1,59 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-struct Student
-{
-    int pid, bt, at, ct, tat, wt, btt;
-
-    Student(int p,int b,int a)
-    {
-        pid = p;
-        bt = b;
-        at = a;
-        btt = b;
-    }
-};
-
-vector<Student> ar;
-int pro;
-
-// Methods back declaration
-void LRTF();
-Student priority(Student lp, Student rp);
-void display();
-
-int main(int argc, const char **argv)
-{
-    cout << "Enter the number of Students ";
-    cin >> pro;
-    for (int i = 0; i < pro; i++)
-    {
-        cout << "Pid \t at \t bt\t for process"<<i<<":";
-        int pid;
-        int at;
-        int bt;
-        cin >> pid>> at>> bt;
-        Student this_student(pid,bt,at);
-        ar.push_back(this_student);
-    }
-    LRTF();
-    display();
-    return 0;
+#include<stdio.h>
+int main()
+{	int process[3]={2132,2102,2453};
+	int burst[3]={2,4,8};
+	int cburst[3]={2,4,8};
+	int at[3]={0,0,0};
+	int c[3]={0,0,0};
+	int tat[3],wt[3];
+	printf(" Longest remaining time first: \n");
+	int i,j;
+	 static int k;
+	for(i=2;i>=0;i--)
+{	
+    for(j=burst[i];j>0;j--)
+	{
+		if(burst[i]>burst[i-1] && burst[i]>burst[i-2])
+		{
+			
+			burst[i]--;
+			c[i]=k+1;
+		}
+		else if(burst[i]==burst[i-1])
+		{
+			if(process[i]<process[i-1])
+			{
+				burst[i-1]--;
+				c[i-1]=k+1;
+			}
+			else
+			{
+			burst[i]--;
+			c[i]=k+10;
+			}
+		}
+		else if(burst[i]==burst[i-2])
+		{	if(process[i]<process[i-2])
+			{
+				burst[i-2]--;
+				c[i-2]=k+1;
+			}
+			else
+			{burst[i]--;
+			c[i]=k+1;
+			}
+		}
+	k++;	
+	}
+	
 }
-bool allDone()
+for(i=0;i<3;i++)
 {
-    int is = 0;
-    for (int i=0;i<ar.size();i++)
-    {
-        if (ar[i].bt > 0)
-        {
-            is += 1;
-        }
-    }
-    return is;
-}
-
-void LRTF()
-{
-    vector<Student> readyqueue;
-    int timer = 0, ct = 0, m = 0;
-    do
-    {
-        if (readyqueue.size() < pro)
-        {
-            for (int j = 0; j < pro; j++)
-            {
-                if (ar[j].at == timer && ar[j].bt > 0)
-                {
-                    readyqueue.push_back(ar[j]);
-                }
-            }
-        }
-        if (readyqueue.size() <= 0)
-        {
-            timer++;
-            continue;
-        }
-        Student lpro = (Student)readyqueue[0];
-
-        for (int k = 0; k < readyqueue.size(); k++)
-        {
-
-            if ((readyqueue[k]).bt <= 0)
-            {
-                readyqueue.erase(readyqueue.begin() + k);
-            }
-        }
-        for (int k = 0; k < readyqueue.size(); k++)
-        {
-            if (lpro.bt < (readyqueue[k]).bt && (readyqueue[k]).bt > 0)
-            {
-                lpro = (Student)(readyqueue[k]);
-            }
-            else if (lpro.bt == (readyqueue[k]).bt && (readyqueue[k]).bt > 0)
-            {
-                lpro = (Student)priority(lpro, readyqueue[k]);
-            }
-            if ((readyqueue[k]).bt <= 0)
-            {
-                readyqueue.erase(readyqueue.begin() + k);
-            }
-        }
-
-        timer++;
-        if (lpro.bt > 0)
-        {
-            lpro.bt -= 1;
-            lpro.ct = timer;
-            lpro.tat = lpro.ct - lpro.at;
-            lpro.wt = lpro.tat - lpro.btt;
-        }
-
-    } while (allDone() > 0 || readyqueue.size() > 0);
+tat[i]=c[i]-at[i];	//Turn Around Time = Completion Time - Arrival Time
+wt[i]= tat[i]-cburst[i];//Waiting Time = Turn Around Time - Burst Time
 }
 
-Student priority(Student lp, Student rp)
-{
-    if (lp.pid > rp.pid)
-    {
-        return rp;
-    }
-    else
-        return lp;
-}
-
-void display()
-{
-
-    cout << "Process id\t Arrival time\t Burst time \t Completion time \t Turn around time \t Waiting time\t";
-    for (int i=0;i<ar.size();i++)
-    {
-        cout << ar[i].pid << "\t" << ar[i].at << "\t" << ar[i].btt << "\t" << ar[i].ct << "\t" << ar[i].tat << "\t" << ar[i].wt;
-    }
+printf("Process 1:Completion time_%d Turn Around Time_%d Waiting Time_%d \n",c[0],tat[0],wt[0]);
+printf("Process 2:Completion time_%d Turn Around Time_%d Waiting Time_%d \n",c[1],tat[1],wt[1]);
+printf("Process 3:Completion time_%d Turn Around Time_%d Waiting Time_%d \n",c[2],tat[2],wt[2]);
 }
